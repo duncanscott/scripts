@@ -5,12 +5,12 @@ then
   exit 1
 fi
 
-set -e
-
 echo "downloading Consul version $CONSUL_VERSION"
 
+set -e
+downloaddir="${HOME}/installers"
 dirname=consul_"$CONSUL_VERSION"
-dirpath="${HOME}"/downloads/consul/$dirname
+dirpath="$downloaddir/consul/$dirname"
 tmppath=/tmp/$dirname
 [ -d "$dirpath" ] && \rm -rf "$dirpath"
 [ -d "$tmppath" ] && \rm -rf "$tmppath"
@@ -40,3 +40,5 @@ mv * "${dirpath}"
 echo "files downloaded to ${dirpath}"
 ls -l "${dirpath}"
 [ -d "$tmppath" ] && \rm -rf "$tmppath"
+echo "executable:"
+find $dirpath -name consul -type f
